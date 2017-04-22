@@ -30,7 +30,6 @@ public class CircularGravity : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         targetDirection = target.position - transform.position; // Save direction
         distance = targetDirection.magnitude; // Find distance between this object and target object
         targetDirection = targetDirection.normalized; // Normalize target direction vector
