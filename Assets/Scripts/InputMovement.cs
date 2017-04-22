@@ -26,6 +26,5 @@ public class InputMovement : MonoBehaviour
 
         else if(horizontal > 0)
             Target.rotation += Speed * Time.deltaTime;
-
     }
 }
