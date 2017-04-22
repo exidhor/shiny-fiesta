@@ -1,18 +1,15 @@
 fileFormatVersion: 2
-guid: 448e204dc5ca962439f2c43af9e00cf3
-timeCreated: 1492894879
+guid: e3241fd91da46ab4389044748d6cdaa1
+timeCreated: 1492894614
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: __Player_jump_loop_0
-    21300002: __Player_jump_loop_1
-    21300004: __Player_jump_loop_2
-    21300006: __Player_jump_loop_3
-    21300008: __Player_jump_loop_4
-    21300010: __Player_jump_loop_5
-    21300012: __Player_jump_loop_6
-    21300014: __Player_jump_loop_7
-    21300016: __Player_jump_loop_8
+    21300000: __Player_fall_loop_0
+    21300002: __Player_fall_loop_1
+    21300004: __Player_fall_loop_2
+    21300006: __Player_fall_loop_3
+    21300008: __Player_fall_loop_4
+    21300010: __Player_fall_loop_5
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -103,117 +100,78 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: __Player_jump_loop_0
+      name: __Player_fall_loop_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 598
-        width: 265
-        height: 299
+        y: 341
+        width: 272
+        height: 341
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: __Player_jump_loop_1
+      name: __Player_fall_loop_1
       rect:
         serializedVersion: 2
-        x: 265
-        y: 598
-        width: 265
-        height: 299
+        x: 272
+        y: 341
+        width: 272
+        height: 341
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: __Player_jump_loop_2
+      name: __Player_fall_loop_2
       rect:
         serializedVersion: 2
-        x: 530
-        y: 598
-        width: 265
-        height: 299
+        x: 544
+        y: 341
+        width: 272
+        height: 341
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: __Player_jump_loop_3
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 299
-        width: 265
-        height: 299
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: __Player_jump_loop_4
-      rect:
-        serializedVersion: 2
-        x: 265
-        y: 299
-        width: 265
-        height: 299
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: __Player_jump_loop_5
-      rect:
-        serializedVersion: 2
-        x: 530
-        y: 299
-        width: 265
-        height: 299
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: __Player_jump_loop_6
+      name: __Player_fall_loop_3
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 265
-        height: 299
+        width: 272
+        height: 341
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: __Player_jump_loop_7
+      name: __Player_fall_loop_4
       rect:
         serializedVersion: 2
-        x: 265
+        x: 272
         y: 0
-        width: 265
-        height: 299
+        width: 272
+        height: 341
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: __Player_jump_loop_8
+      name: __Player_fall_loop_5
       rect:
         serializedVersion: 2
-        x: 530
+        x: 544
         y: 0
-        width: 265
-        height: 299
+        width: 272
+        height: 341
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
