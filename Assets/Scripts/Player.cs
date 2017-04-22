@@ -153,4 +153,9 @@ public class Player : MonoBehaviour
 
         _animator.SetTrigger("Jump");
     }
+
+    public void PickPickUp(PickUp pickUp)
+    {
+        // Todo
+    }
 }
