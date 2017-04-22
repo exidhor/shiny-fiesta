@@ -172,7 +172,7 @@ public class Player : MonoBehaviour
         else if (IsDescending && !_lastDescending)
         {
             ResetBuffers();
-            _animator.SetTrigger("Descending");
+            _animator.SetTrigger("Fall");
             _lastDescending = true;
             IsDescending = true;
         }
