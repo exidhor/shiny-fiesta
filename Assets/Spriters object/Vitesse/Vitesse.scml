@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<spriter_data scml_version="1.0" generator="BrashMonkey Spriter" generator_version="r11">
+    <folder id="0" name="pick_ups">
+        <file id="0" name="pick_ups/coin_a_face.png" width="95" height="98" pivot_x="0.5" pivot_y="0.5"/>
+        <file id="1" name="pick_ups/coin_a_back.png" width="95" height="98" pivot_x="0.5" pivot_y="0.5"/>
+        <file id="2" name="pick_ups/coin_a_side.png" width="21" height="98" pivot_x="0.5" pivot_y="0.5"/>
+        <file id="3" name="pick_ups/coin_shine_4.png" width="95" height="98" pivot_x="0.5" pivot_y="0.5"/>
+        <file id="4" name="pick_ups/coin_shine_3.png" width="95" height="98" pivot_x="0.5" pivot_y="0.5"/>
+        <file id="5" name="pick_ups/coin_shine_2.png" width="95" height="98" pivot_x="0.5" pivot_y="0.5"/>
+        <file id="6" name="pick_ups/coin_shine_1.png" width="95" height="98" pivot_x="0.5" pivot_y="0.5"/>
+        <file id="7" name="pick_ups/coin_shine_0.png" width="95" height="98" pivot_x="0.5" pivot_y="0.5"/>
+        <file id="8" name="pick_ups/coin_a_sides.png" width="67" height="98" pivot_x="0.5" pivot_y="0.5"/>
+    </folder>
+    <entity id="0" name="pick_ups">
+        <animation id="0" name="coin_0" length="1600" interval="100" looping="false">
+            <mainline>
+                <key id="0">
+                    <object_ref id="0" timeline="0" key="0" z_index="0"/>
+                </key>
+                <key id="1" time="636">
+                    <object_ref id="0" timeline="0" key="0" z_index="0"/>
+                    <object_ref id="1" timeline="1" key="0" z_index="1"/>
+                </key>
+                <key id="2" time="686">
+                    <object_ref id="0" timeline="0" key="0" z_index="0"/>
+                    <object_ref id="1" timeline="1" key="1" z_index="1"/>
+                </key>
+                <key id="3" time="735">
+                    <object_ref id="0" timeline="0" key="0" z_index="0"/>
+                    <object_ref id="1" timeline="1" key="2" z_index="1"/>
+                </key>
+                <key id="4" time="785">
+                    <object_ref id="0" timeline="0" key="0" z_index="0"/>
+                    <object_ref id="1" timeline="1" key="3" z_index="1"/>
+                </key>
+                <key id="5" time="832">
+                    <object_ref id="0" timeline="0" key="1" z_index="0"/>
+                    <object_ref id="1" timeline="1" key="4" z_index="1"/>
+                </key>
+                <key id="6" time="882">
+                    <object_ref id="0" timeline="0" key="2" z_index="0"/>
+                </key>
+            </mainline>
+            <timeline id="0" name="coin_a_face">
+                <key id="0" spin="0">
+                    <object folder="0" file="0" angle="0"/>
+                </key>
+                <key id="1" time="832" spin="0">
+                    <object folder="0" file="0" angle="0"/>
+                </key>
+                <key id="2" time="882" spin="0">
+                    <object folder="0" file="0" angle="0"/>
+                </key>
+            </timeline>
+            <timeline id="1" name="coin_shine_0">
+                <key id="0" time="636" spin="0">
+                    <object folder="0" file="7" angle="0"/>
+                </key>
+                <key id="1" time="686" spin="0">
+                    <object folder="0" file="6" angle="0"/>
+                </key>
+                <key id="2" time="735" spin="0">
+                    <object folder="0" file="5" angle="0"/>
+                </key>
+                <key id="3" time="785" spin="0">
+                    <object folder="0" file="4" angle="0"/>
+                </key>
+                <key id="4" time="832" spin="0">
+                    <object folder="0" file="3" angle="0"/>
+                </key>
+            </timeline>
+        </animation>
+    </entity>
+</spriter_data>
