@@ -7,6 +7,13 @@ public class PickUp : MonoBehaviour {
     public float TimeBeforeReactivation;
     public float timeElapsed = 0;
     bool active;
+    public TypePickUp Type;
+
+    public enum TypePickUp
+    {
+        score,
+        speedBoost
+    }
 
     void OnTriggerEnter2D(Collider2D other)
     {

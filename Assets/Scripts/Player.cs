@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(Animator))]
 public class Player : MonoBehaviour
@@ -34,6 +35,9 @@ public class Player : MonoBehaviour
     private Vector3 _leftScale;
     private Vector3 _rightScale;
 
+    private int score;
+    public Text scoreText;
+
     void Awake()
     {
         _rigidBody = GetComponent<Rigidbody2D>();
@@ -46,9 +50,17 @@ public class Player : MonoBehaviour
         _rightScale = transform.localScale;
     }
 
+    void Start()
+    {
+        score = 0;
+    }
+
     void Update()
     {
-
+        string str = score.ToString();
+        while(str.Length < 5)
+            str = '0' + str;
+        scoreText.text = str;
     }
 
     void FixedUpdate()
@@ -156,6 +168,17 @@ public class Player : MonoBehaviour
 
     public void PickPickUp(PickUp pickUp)
     {
-        // Todo
+        switch(pickUp.Type)
+        {
+            case PickUp.TypePickUp.score:
+                score += 10;
+                break;
+            case PickUp.TypePickUp.speedBoost:
+                // TO DO
+                break;
+
+            default:
+                break;
+        }
     }
 }
