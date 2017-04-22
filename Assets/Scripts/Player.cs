@@ -7,6 +7,9 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D), typeof(Animator))]
 public class Player : MonoBehaviour
 {
+    public TriggerZone TriggerLeft;
+    public TriggerZone TriggerRight;
+
     public float SpeedPlanet;
     public Rigidbody2D TargetRotation;
 
@@ -15,6 +18,12 @@ public class Player : MonoBehaviour
     public bool IsDescending;
     public bool IsRunning;
     public bool IsIdle;
+
+    private bool _lastGrounded = false;
+    private bool _lastJumping = false;
+    private bool _lastDescending = false;
+    private bool _lastRunning = false;
+    private bool _lastIdle = false;
 
     public Transform RayOrigin;
     public float rayCheckDistance;
@@ -46,12 +55,19 @@ public class Player : MonoBehaviour
         _rightScale = transform.localScale;
     }
 
-    void Update()
-    {
 
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.magenta;
+
+        Vector3 offset = RayOrigin.position - TargetRotation.transform.position;
+        offset.Normalize();
+        offset *= rayCheckDistance;
+
+        Gizmos.DrawLine(RayOrigin.position, RayOrigin.position - offset);
     }
 
-    void FixedUpdate()
+    void Update()
     {
         CheckForGround();
 
@@ -61,46 +77,38 @@ public class Player : MonoBehaviour
 
             if (SpeedDebug < MinSpeed)
             {
-                IsDescending = true;
-
-                //_rigidBody.velocity = Vector2.zero;
-
-                _rigidBody.AddForce(Vector2.down*DescendingForce, descendingForceMode);
-                _animator.SetTrigger("Descending");
-                //_rigidBody.velocity = Vector2.down * DescendingForce;
+                Descending();
             }
         }
         else if (!IsJumping && !IsGrounded && !IsDescending)
         {
-            IsDescending = true;
-
-            //_rigidBody.velocity = Vector2.zero;
-
-            _rigidBody.AddForce(Vector2.down * DescendingForce, descendingForceMode);
-            _animator.SetTrigger("Descending");
-            //_rigidBody.velocity = Vector2.down * DescendingForce;
+            Descending();
         }
 
         float horizontal = (int) Input.GetAxisRaw("Horizontal");
 
         if (horizontal != 0)
         {
-            if (horizontal < 0)
+            if (horizontal < 0 && !TriggerLeft.Collision)
             {
-                TargetRotation.rotation += -SpeedPlanet * Time.deltaTime;
+                TargetRotation.rotation += -SpeedPlanet*Time.deltaTime;
                 transform.localScale = _leftScale;
+
+                TriggerRight.transform.localScale = _leftScale;
+                TriggerLeft.transform.localScale = _leftScale;
             }
-            else if (horizontal > 0)
+            else if (horizontal > 0 && !TriggerRight.Collision)
             {
-                TargetRotation.rotation += SpeedPlanet * Time.deltaTime;
+                TargetRotation.rotation += SpeedPlanet*Time.deltaTime;
                 transform.localScale = _rightScale;
+
+                TriggerRight.transform.localScale = _rightScale;
+                TriggerLeft.transform.localScale = _rightScale;
             }
 
             if (!IsRunning && IsGrounded)
             {
-                _animator.SetTrigger("Run");
-                IsRunning = true;
-                IsIdle = false;
+                Run();
             }
         }
         else
@@ -109,8 +117,7 @@ public class Player : MonoBehaviour
 
             if (IsGrounded && !IsJumping && !IsIdle)
             {
-                _animator.SetTrigger("Idle");
-                IsIdle = true;
+                Idle();
             }
         }
 
@@ -118,27 +125,67 @@ public class Player : MonoBehaviour
         {
             Jump();
         }
+
+        if (IsJumping && !_lastJumping)
+        {
+            ResetBuffers();
+            _animator.SetTrigger("Jump");
+            _lastJumping = true;
+            IsJumping = true;
+        }
+
+        else if (IsRunning && !_lastRunning)
+        {
+            ResetBuffers();
+            _animator.SetTrigger("Run");
+            _lastRunning = true;
+            IsRunning = true;
+        }
+
+        else if (IsIdle && !_lastIdle)
+        {
+            ResetBuffers();
+            _animator.SetTrigger("Idle");
+            _lastIdle = true;
+            IsIdle = true;
+        }
+
+        else if (IsDescending && !_lastDescending)
+        {
+            ResetBuffers();
+            _animator.SetTrigger("Descending");
+            _lastDescending = true;
+            IsDescending = true;
+        }
     }
 
     private void CheckForGround()
     {
-        RaycastHit2D hit = Physics2D.Raycast(RayOrigin.transform.position, TargetRotation.position, rayCheckDistance, ground);
+        RaycastHit2D hit = Physics2D.Raycast(RayOrigin.transform.position, TargetRotation.position, rayCheckDistance,
+            ground);
 
         if (hit.collider != null)
         {
             IsGrounded = true;
             IsJumping = false;
             IsDescending = false;
-
-            //_rigidBody.velocity = Vector2.zero;
         }
         else
         {
             IsGrounded = false;
             IsRunning = false;
             IsIdle = false;
-            IsRunning = false;
         }
+    }
+
+    private void Descending()
+    {
+        ResetBuffers();
+        IsDescending = true;
+
+        _rigidBody.AddForce(Vector2.down * DescendingForce, descendingForceMode);
+
+        Debug.Log("IsDescending");
     }
 
     private void Jump()
@@ -147,10 +194,38 @@ public class Player : MonoBehaviour
 
         _rigidBody.velocity = Vector2.zero;
         _rigidBody.AddForce(Vector2.up*JumpForce, JumpForceMode);
-        //_rigidBody.velocity = Vector2.up * JumpForce;
-        IsJumping = true;
-        IsDescending = false;
 
-        _animator.SetTrigger("Jump");
+        ResetBuffers();
+        IsJumping = true;
+    }
+
+    private void Run()
+    {
+        ResetBuffers();
+        IsRunning = true;
+
+        Debug.Log("Run");
+    }
+
+    private void Idle()
+    {
+        ResetBuffers();
+        IsIdle = true;
+
+        Debug.Log("idle");
+    }
+
+    private void ResetBuffers()
+    {
+        _lastGrounded = false;
+        _lastJumping = false;
+        _lastDescending = false;
+        _lastRunning = false;
+        _lastIdle = false;
+
+        IsJumping = false;
+        IsDescending = false;
+        IsIdle = false;
+        IsRunning = false;
     }
 }
