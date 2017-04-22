@@ -48,10 +48,7 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetAxis("Jump") > 0 && IsGrounded && !IsJumping && !IsDescending)
-        {
-            Jump();
-        }
+
     }
 
     void FixedUpdate()
@@ -117,6 +114,10 @@ public class Player : MonoBehaviour
             }
         }
 
+        if (Input.GetAxis("Jump") > 0 && IsGrounded && !IsJumping && !IsDescending)
+        {
+            Jump();
+        }
     }
 
     private void CheckForGround()
