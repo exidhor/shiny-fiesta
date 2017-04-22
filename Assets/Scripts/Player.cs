@@ -77,10 +77,13 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        string str = score.ToString();
-        while(str.Length < 5)
-            str = '0' + str;
-        scoreText.text = str;
+        if (scoreText != null)
+        {
+            string str = score.ToString();
+            while (str.Length < 5)
+                str = '0' + str;
+            scoreText.text = str;
+        }
     }
 
     void FixedUpdate()
@@ -199,7 +202,7 @@ public class Player : MonoBehaviour
         ResetBuffers();
         IsDescending = true;
 
-        _rigidBody.AddForce(Vector2.down * DescendingForce, descendingForceMode);
+        _rigidBody.AddForce(Vector2.down*DescendingForce, descendingForceMode);
 
         Debug.Log("IsDescending");
     }
@@ -247,7 +250,7 @@ public class Player : MonoBehaviour
 
     public void PickPickUp(PickUp pickUp)
     {
-        switch(pickUp.Type)
+        switch (pickUp.Type)
         {
             case PickUp.TypePickUp.score:
                 score += 10;
