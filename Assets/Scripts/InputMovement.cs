@@ -8,11 +8,11 @@ public class InputMovement : MonoBehaviour
 {
     public float Speed;
 
-    private Rigidbody2D _rigidBody;
+    public Rigidbody2D Target;
 
     void Awake()
     {
-        _rigidBody = GetComponent<Rigidbody2D>();
+        Target = GetComponent<Rigidbody2D>();
     }
 
     void Update()
@@ -22,10 +22,10 @@ public class InputMovement : MonoBehaviour
         horizontal = (int)Input.GetAxisRaw("Horizontal");
 
         if(horizontal < 0)
-            _rigidBody.rotation += -Speed * Time.deltaTime;
+            Target.rotation += -Speed * Time.deltaTime;
 
         else if(horizontal > 0)
-            _rigidBody.rotation += Speed * Time.deltaTime;
+            Target.rotation += Speed * Time.deltaTime;
 
     }
 }
