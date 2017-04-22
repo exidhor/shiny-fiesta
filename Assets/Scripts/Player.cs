@@ -8,11 +8,19 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public bool IsGrounded;
+    public bool IsJumping;
+    public bool IsDescending;
 
     public Transform RayOrigin;
     public float rayCheckDistance;
     public float JumpForce;
+    public ForceMode2D JumpForceMode;
     public LayerMask ground;
+
+    public float Speed;
+    public float MinSpeed;
+    public float DescendingForce;
+    public ForceMode2D descendingForceMode;
 
     private Rigidbody2D _rigidBody;
 
@@ -23,23 +31,58 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetAxis("Jump") > 0 && CheckForGround())
+        if (Input.GetAxis("Jump") > 0 && IsGrounded && !IsJumping)
         {
             Jump();
         }
     }
 
-    private bool CheckForGround()
+    void FixedUpdate()
+    {
+        CheckForGround();
+
+        if (IsJumping && !IsDescending)
+        {
+            Speed = _rigidBody.velocity.y;
+
+            if (Speed < MinSpeed)
+            {
+                IsDescending = true;
+
+                //_rigidBody.velocity = Vector2.zero;
+
+                _rigidBody.AddForce(Vector2.down*DescendingForce, descendingForceMode);
+                //_rigidBody.velocity = Vector2.down * DescendingForce;
+            }
+        }
+    }
+
+    private void CheckForGround()
     {
         RaycastHit2D hit = Physics2D.Raycast(RayOrigin.transform.position, Vector2.down, rayCheckDistance, ground);
 
-        IsGrounded = (hit.collider != null);
+        if (hit.collider != null)
+        {
+            IsGrounded = true;
+            IsJumping = false;
+            IsDescending = false;
 
-        return IsGrounded;
+            //_rigidBody.velocity = Vector2.zero;
+        }
+        else
+        {
+            IsGrounded = false;
+        }
     }
 
     private void Jump()
     {
-        _rigidBody.AddForce(Vector2.up * JumpForce, ForceMode2D.Impulse);
+        Debug.Log("Jump");
+
+        _rigidBody.velocity = Vector2.zero;
+        _rigidBody.AddForce(Vector2.up*JumpForce, JumpForceMode);
+        //_rigidBody.velocity = Vector2.up * JumpForce;
+        IsJumping = true;
+        IsDescending = false;
     }
 }
