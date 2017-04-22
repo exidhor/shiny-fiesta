@@ -22,15 +22,20 @@ public class PickUp : MonoBehaviour {
             Player player = other.gameObject.GetComponent<Player>();
             player.PickPickUp(this);
             active = false;
-            Color tmp = gameObject.GetComponent<SpriteRenderer>().color;
-            tmp.a = 0;
-            gameObject.GetComponent<SpriteRenderer>().color = tmp;
+            SpriteRenderer[] renderers = gameObject.GetComponentsInChildren<SpriteRenderer>();
+            for(int i = 0; i < renderers.GetLength(0); ++i)
+            {
+                Color tmp = renderers[i].color;
+                tmp.a = 0;
+                renderers[i].color = tmp;
+            }
         }
     }
 
     // Use this for initialization
     void Start () {
         timeElapsed = 0;
+        active = true;
     }
 	
 	// Update is called once per frame
@@ -42,9 +47,13 @@ public class PickUp : MonoBehaviour {
             if (timeElapsed >= TimeBeforeReactivation)
             {
                 timeElapsed = 0;
-                Color tmp = gameObject.GetComponent<SpriteRenderer>().color;
-                tmp.a = 255;
-                gameObject.GetComponent<SpriteRenderer>().color = tmp;
+                SpriteRenderer[] renderers = gameObject.GetComponentsInChildren<SpriteRenderer>();
+                for (int i = 0; i < renderers.GetLength(0); ++i)
+                {
+                    Color tmp = renderers[i].color;
+                    tmp.a = 255;
+                    renderers[i].color = tmp;
+                }
                 active = true;
             }
         }
