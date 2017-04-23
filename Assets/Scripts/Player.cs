@@ -55,6 +55,7 @@ public class Player : MonoBehaviour
     public Text scoreText;
 
     public Weed WeedInContact;
+    public bool IsNearWell;
 
     private bool _takeSomethingThisFrame;
 
@@ -85,6 +86,7 @@ public class Player : MonoBehaviour
     {
         score = 0;
         WeedInContact = null;
+        IsNearWell = false;
     }
 
     void Update()
@@ -323,10 +325,18 @@ public class Player : MonoBehaviour
 
     public void Release()
     {
-        if (WeedInContact != null && _takable != null && _takable.gameObject.GetComponent<Bucket>() != null)
+        if (WeedInContact != null && _takable != null && _takable.gameObject.GetComponent<Bucket>() != null && !_takable.gameObject.GetComponent<Bucket>().IsCorupted)
         {
             WeedInContact.ReceiveWater(_takable.gameObject.GetComponent<Bucket>().FillLevel);
             _takable.gameObject.GetComponent<Bucket>().FillLevel = 0;
+            return;
+        }
+
+        if(IsNearWell && _takable != null && _takable.gameObject.GetComponent<Bucket>() != null)
+        {
+            _takable.gameObject.GetComponent<Bucket>().FillLevel = 0;
+            _takable.gameObject.GetComponent<Bucket>().IsCorupted = false;
+            _takable.gameObject.GetComponent<Bucket>().progress.IsCorrupted = false;
             return;
         }
 
