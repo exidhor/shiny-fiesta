@@ -8,7 +8,8 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Rigidbody2D), typeof(Animator))]
 public class Player : MonoBehaviour
 {
-    public Transform BucketContainer;
+    public Transform TakableContainer;
+    public Transform Ground;
 
     public TriggerZone TriggerLeft;
     public TriggerZone TriggerRight;
@@ -50,6 +51,8 @@ public class Player : MonoBehaviour
 
     private int score;
     public Text scoreText;
+
+    private bool _takeSomethingThisFrame;
 
     void Awake()
     {
@@ -180,6 +183,13 @@ public class Player : MonoBehaviour
             _lastDescending = true;
             IsDescending = true;
         }
+
+        if (_takable && !_takeSomethingThisFrame && InputManager.Instance.Action)
+        {
+            Release();
+        }
+
+        _takeSomethingThisFrame = false;
     }
 
     private void CheckForGround()
@@ -270,10 +280,22 @@ public class Player : MonoBehaviour
 
     public void Take(Takable takable)
     {
-        _takable = takable;
+        if (_takable == null && InputManager.Instance.Action)
+        {
+            _takeSomethingThisFrame = true;
 
-        _takable.transform.parent = BucketContainer;
-        _takable.transform.position = BucketContainer.position;
-        _takable.transform.rotation = BucketContainer.rotation;
+            _takable = takable;
+
+            _takable.transform.parent = TakableContainer;
+            _takable.transform.position = TakableContainer.position;
+            _takable.transform.rotation = TakableContainer.rotation;
+        }
+    }
+
+    public void Release()
+    {
+        _takable.transform.parent = TargetRotation.transform;
+        _takable.transform.position = Ground.position;
+        _takable = null;
     }
 }

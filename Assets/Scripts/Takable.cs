@@ -10,7 +10,7 @@ public class Takable : MonoBehaviour
     {
         Player player = collider.GetComponent<Player>();
 
-        if (player != null && Input.GetButton("Action"))
+        if (player != null)
         {
             player.Take(this);
         }
