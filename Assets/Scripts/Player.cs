@@ -278,7 +278,21 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void Take(Takable takable)
+    public bool Buy(Takable takable, int price)
+    {
+        if (price <= score)
+        {
+            if (Take(takable))
+            {
+                score -= price;
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public bool Take(Takable takable)
     {
         if (_takable == null && InputManager.Instance.Action)
         {
@@ -289,7 +303,11 @@ public class Player : MonoBehaviour
             _takable.transform.parent = TakableContainer;
             _takable.transform.position = TakableContainer.position;
             _takable.transform.rotation = TakableContainer.rotation;
+
+            return true;
         }
+
+        return false;
     }
 
     public void Release()
