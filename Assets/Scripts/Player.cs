@@ -322,6 +322,10 @@ public class Player : MonoBehaviour
     {
         _takable.transform.parent = TargetRotation.transform;
         _takable.transform.position = Ground.position;
+        if(_takable.gameObject.GetComponent<Weed>() != null)
+        {
+            _takable.gameObject.GetComponent<Weed>().IsOnTheGround = true;
+        }
         _takable = null;
     }
 }
