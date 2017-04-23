@@ -4,12 +4,25 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 
+[RequireComponent(typeof(SpriteRenderer))]
 public class Basket : MonoBehaviour
 {
     public int Amount;
     public Player Player;
 
     public WeedType WeedType;
+
+    public Sprite VoidSprite;
+    public Sprite RedSprite;
+    public Sprite BlueSprite;
+    public Sprite PurpleSprite;
+
+    private SpriteRenderer _renderer;
+
+    void Awake()
+    {
+        _renderer = GetComponent<SpriteRenderer>();
+    }
 
     void OnTriggerStay2D(Collider2D collider)
     {
@@ -28,8 +41,24 @@ public class Basket : MonoBehaviour
             else
             {
                 WeedType = weed.WeedType;
+                
                 Amount++;
                 Destroy(collider.gameObject);
+
+                switch (WeedType)
+                {
+                    case WeedType.Blue:
+                        _renderer.sprite = BlueSprite;
+                        break;
+
+                    case WeedType.Purple:
+                        _renderer.sprite = PurpleSprite;
+                        break;
+
+                    case WeedType.Red:
+                        _renderer.sprite = RedSprite;
+                        break;
+                }
             }
 
             return;
@@ -42,6 +71,9 @@ public class Basket : MonoBehaviour
             if (Amount > 0)
             {
                 Player.score += dealer.Sell(Amount, WeedType);
+                Amount = 0;
+
+                _renderer.sprite = VoidSprite;
             }   
         }
     }
