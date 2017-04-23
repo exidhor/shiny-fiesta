@@ -40,6 +40,8 @@ public class Player : MonoBehaviour
     public float DescendingForce;
     public ForceMode2D descendingForceMode;
 
+    public Transform BucketDisplay;
+
     private Animator _animator;
 
     private Rigidbody2D _rigidBody;
@@ -122,6 +124,8 @@ public class Player : MonoBehaviour
 
                 TriggerRight.transform.localScale = _leftScale;
                 TriggerLeft.transform.localScale = _leftScale;
+
+                BucketDisplay.transform.localScale = _leftScale;
             }
             else if (horizontal > 0 && !TriggerRight.Collision)
             {
@@ -130,6 +134,8 @@ public class Player : MonoBehaviour
 
                 TriggerRight.transform.localScale = _rightScale;
                 TriggerLeft.transform.localScale = _rightScale;
+
+                BucketDisplay.transform.localScale = _rightScale;
             }
 
             if (!IsRunning && IsGrounded)
