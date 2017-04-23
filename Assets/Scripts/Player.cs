@@ -8,6 +8,8 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Rigidbody2D), typeof(Animator))]
 public class Player : MonoBehaviour
 {
+    public Transform BucketContainer;
+
     public TriggerZone TriggerLeft;
     public TriggerZone TriggerRight;
 
@@ -43,6 +45,8 @@ public class Player : MonoBehaviour
 
     private Vector3 _leftScale;
     private Vector3 _rightScale;
+
+    private Bucket _bucket;
 
     private int score;
     public Text scoreText;
@@ -262,5 +266,14 @@ public class Player : MonoBehaviour
             default:
                 break;
         }
+    }
+
+    public void TakeBucket(Bucket bucket)
+    {
+        _bucket = bucket;
+
+        bucket.transform.parent = BucketContainer;
+        bucket.transform.position = BucketContainer.position;
+        bucket.transform.rotation = BucketContainer.rotation;
     }
 }
