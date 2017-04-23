@@ -54,6 +54,8 @@ public class Player : MonoBehaviour
     public int score;
     public Text scoreText;
 
+    public Weed WeedInContact;
+
     private bool _takeSomethingThisFrame;
 
     void Awake()
@@ -82,6 +84,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         score = 0;
+        WeedInContact = null;
     }
 
     void Update()
@@ -320,9 +323,16 @@ public class Player : MonoBehaviour
 
     public void Release()
     {
+        if (WeedInContact != null && _takable != null && _takable.gameObject.GetComponent<Bucket>() != null)
+        {
+            WeedInContact.ReceiveWater(_takable.gameObject.GetComponent<Bucket>().FillLevel);
+            _takable.gameObject.GetComponent<Bucket>().FillLevel = 0;
+            return;
+        }
+
         _takable.transform.parent = TargetRotation.transform;
         _takable.transform.position = Ground.position;
-        if(_takable.gameObject.GetComponent<Weed>() != null)
+        if (_takable.gameObject.GetComponent<Weed>() != null)
         {
             _takable.gameObject.GetComponent<Weed>().IsOnTheGround = true;
         }
