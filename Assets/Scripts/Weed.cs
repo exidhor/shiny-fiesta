@@ -44,4 +44,34 @@ public class Weed : MonoBehaviour
         CurrentWater = 0;
     }
 
+    void OnTriggerEnter2D(Collider2D coll)
+    {
+        if(coll.GetComponent<Player>() != null)
+        {
+            Player player = coll.GetComponent<Player>();
+            if(player.WeedInContact == null)
+                player.WeedInContact = this;
+        }
+    }
+
+    void OnTriggerStay2D(Collider2D coll)
+    {
+        if (coll.GetComponent<Player>() != null)
+        {
+            Player player = coll.GetComponent<Player>();
+            if (player.WeedInContact == null)
+                player.WeedInContact = this;
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D coll)
+    {
+        if (coll.GetComponent<Player>() != null)
+        {
+            Player player = coll.GetComponent<Player>();
+            if (player.WeedInContact == this)
+                player.WeedInContact = null;
+        }
+    }
+
 }
