@@ -15,7 +15,7 @@ public class LightController : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update ()
+	void FixedUpdate ()
     {
         gameObject.transform.RotateAround(PlanetCenter.position, new Vector3(0, 0, 1),Speed);
     }
