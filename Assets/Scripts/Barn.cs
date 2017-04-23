@@ -17,6 +17,7 @@ public class Barn : MonoBehaviour
         if (nextWeed == null)
         {
             nextWeed = Instantiate(WeedPrefab);
+            nextWeed.gameObject.SetActive(false);
         }
     }
 
@@ -28,6 +29,7 @@ public class Barn : MonoBehaviour
         {
             if (player.Buy(nextWeed.GetComponent<Takable>(), Price))
             {
+                nextWeed.gameObject.SetActive(true);
                 nextWeed = null;
             }
         }
