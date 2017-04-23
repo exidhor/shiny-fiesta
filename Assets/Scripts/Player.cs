@@ -47,7 +47,7 @@ public class Player : MonoBehaviour
     private Vector3 _leftScale;
     private Vector3 _rightScale;
 
-    private Takable _takable;
+    private GameObject _takable;
 
     private int score;
     public Text scoreText;
@@ -285,6 +285,8 @@ public class Player : MonoBehaviour
             if (Take(takable))
             {
                 score -= price;
+
+                Destroy(takable);
                 return true;
             }
         }
@@ -298,7 +300,7 @@ public class Player : MonoBehaviour
         {
             _takeSomethingThisFrame = true;
 
-            _takable = takable;
+            _takable = takable.gameObject;
 
             _takable.transform.parent = TakableContainer;
             _takable.transform.position = TakableContainer.position;

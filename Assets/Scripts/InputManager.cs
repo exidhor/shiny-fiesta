@@ -20,9 +20,21 @@ public class InputManager : MonoSingleton<InputManager>
 
     private bool _action;
 
+    private int _maxFrameLife  = 3;
+
+    private int _currentFrameLife;
+
     void FixedUpdate()
     {
-        if(!_action)
+        _currentFrameLife++;
+
+        if (_currentFrameLife > _maxFrameLife)
+        {
+            _action = false;
+            _currentFrameLife = 0;
+        }
+
+        if (!_action)
             _action = Input.GetButtonDown("Action");
     }
 }
