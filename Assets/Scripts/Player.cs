@@ -46,7 +46,7 @@ public class Player : MonoBehaviour
     private Vector3 _leftScale;
     private Vector3 _rightScale;
 
-    private Bucket _bucket;
+    private Takable _takable;
 
     private int score;
     public Text scoreText;
@@ -268,12 +268,12 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void TakeBucket(Bucket bucket)
+    public void Take(Takable takable)
     {
-        _bucket = bucket;
+        _takable = takable;
 
-        bucket.transform.parent = BucketContainer;
-        bucket.transform.position = BucketContainer.position;
-        bucket.transform.rotation = BucketContainer.rotation;
+        _takable.transform.parent = BucketContainer;
+        _takable.transform.position = BucketContainer.position;
+        _takable.transform.rotation = BucketContainer.rotation;
     }
 }

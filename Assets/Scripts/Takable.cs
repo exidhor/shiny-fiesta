@@ -4,15 +4,15 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 
-public class Bucket : MonoBehaviour
+public class Takable : MonoBehaviour
 {
     void OnTriggerStay2D(Collider2D collider)
     {
         Player player = collider.GetComponent<Player>();
 
-        if (player != null && Input.GetButton("BucketAction"))
+        if (player != null && Input.GetButton("Action"))
         {
-            player.TakeBucket(this);
+            player.Take(this);
         }
     }
 }
