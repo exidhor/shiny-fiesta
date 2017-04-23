@@ -18,6 +18,9 @@ public class ProgressSeau : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
+        if (CurrentValue < 0)
+            CurrentValue = 0;
+
         int index =  (int)(((float)CurrentValue / (float) Max) * sprites.GetLength(0));
         if (index >= sprites.GetLength(0))
             index = sprites.GetLength(0) - 1;

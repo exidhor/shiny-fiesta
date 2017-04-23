@@ -7,11 +7,15 @@ public class LightController : MonoBehaviour {
     public Transform PlanetCenter;
     public float Radius = 7;
     public float Speed;
+    public bool Inverted = false;
 
 	// Use this for initialization
 	void Start ()
     {
-        gameObject.transform.position = new Vector3(0.0f,Radius,0.0f);
+        if(Inverted)
+            gameObject.transform.position = new Vector3(0.0f, -Radius, 0.0f);
+        else
+            gameObject.transform.position = new Vector3(0.0f,Radius,0.0f);
 	}
 	
 	// Update is called once per frame

@@ -24,6 +24,9 @@ public class Weed : MonoBehaviour
             CurrentWater += waterAmount;
             if (CurrentWater >= MaxWater)
                 CurrentWater = MaxWater;
+
+            if (CurrentWater < 0)
+                Destroy(gameObject);
         }
     }
 
