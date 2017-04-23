@@ -218,12 +218,12 @@ public class Player : MonoBehaviour
 
         _rigidBody.AddForce(Vector2.down*DescendingForce, descendingForceMode);
 
-        Debug.Log("IsDescending");
+        //Debug.Log("IsDescending");
     }
 
     private void Jump()
     {
-        Debug.Log("Jump");
+        //Debug.Log("Jump");
 
         _rigidBody.velocity = Vector2.zero;
         _rigidBody.AddForce(Vector2.up*JumpForce, JumpForceMode);
@@ -237,7 +237,7 @@ public class Player : MonoBehaviour
         ResetBuffers();
         IsRunning = true;
 
-        Debug.Log("Run");
+        //Debug.Log("Run");
     }
 
     private void Idle()
@@ -245,7 +245,7 @@ public class Player : MonoBehaviour
         ResetBuffers();
         IsIdle = true;
 
-        Debug.Log("idle");
+        //Debug.Log("idle");
     }
 
     private void ResetBuffers()
