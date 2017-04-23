@@ -20,7 +20,7 @@ public class InputManager : MonoSingleton<InputManager>
 
     private bool _action;
 
-    private int _maxFrameLife  = 3;
+    private int _maxFrameLife  = 5;
 
     private int _currentFrameLife;
 

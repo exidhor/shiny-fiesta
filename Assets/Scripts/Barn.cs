@@ -12,13 +12,26 @@ public class Barn : MonoBehaviour
 
     private Weed nextWeed;
 
+    private Player _player;
+
     void FixedUpdate()
     {
+        if (_player)
+        {
+            if (_player.Buy(nextWeed.GetComponent<Takable>(), Price))
+            {
+                nextWeed.gameObject.SetActive(true);
+                nextWeed = null;
+            }
+        }
+
         if (nextWeed == null)
         {
             nextWeed = Instantiate(WeedPrefab);
             nextWeed.gameObject.SetActive(false);
         }
+
+        _player = null;
     }
 
     void OnTriggerStay2D(Collider2D collider)
@@ -27,11 +40,7 @@ public class Barn : MonoBehaviour
 
         if (player != null)
         {
-            if (player.Buy(nextWeed.GetComponent<Takable>(), Price))
-            {
-                nextWeed.gameObject.SetActive(true);
-                nextWeed = null;
-            }
+            _player = player;
         }
     }
 }
