@@ -12,6 +12,8 @@ public class Weed : MonoBehaviour
     public Sprite[] sprites = new Sprite[3];
     public bool IsOnTheGround = false;
 
+    public WeedType WeedType;
+
     public bool IsPickable
     {
         get { return CurrentWater == MaxWater; }
@@ -30,12 +32,15 @@ public class Weed : MonoBehaviour
     void Update()
     {
         SpriteRenderer renderer = gameObject.GetComponent<SpriteRenderer>();
-        if (CurrentWater < MaxWater / 2)
+        if (CurrentWater < MaxWater/2)
             renderer.sprite = sprites[0];
         else if (CurrentWater < MaxWater)
             renderer.sprite = sprites[1];
         else
+        {
             renderer.sprite = sprites[2];
+
+        }
     }
 
     void Start()
@@ -43,5 +48,4 @@ public class Weed : MonoBehaviour
         IsOnTheGround = false;
         CurrentWater = 0;
     }
-
 }

@@ -51,7 +51,7 @@ public class Player : MonoBehaviour
 
     private GameObject _takable;
 
-    private int score;
+    public int score;
     public Text scoreText;
 
     private bool _takeSomethingThisFrame;
