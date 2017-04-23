@@ -6,6 +6,7 @@ public class Bucket : MonoBehaviour {
 
     public int FillLevel = 0;
     public int CompleteLevel = 100;
+    public ProgressSeau progress;
 
     public void Fill(int quantity)
     {
@@ -28,6 +29,6 @@ public class Bucket : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+        progress.CurrentValue = FillLevel;
 	}
 }
