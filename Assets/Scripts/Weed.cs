@@ -10,12 +10,16 @@ public class Weed : MonoBehaviour
     public int CurrentWater;
     public int MaxWater = 300;
     public Sprite[] sprites = new Sprite[3];
+    public bool IsOnTheGround = false;
 
     public void ReceiveWater(int waterAmount)
     {
-        CurrentWater += waterAmount;
-        if (CurrentWater >= MaxWater)
-            CurrentWater = MaxWater;
+        if (IsOnTheGround)
+        {
+            CurrentWater += waterAmount;
+            if (CurrentWater >= MaxWater)
+                CurrentWater = MaxWater;
+        }
     }
 
     void Update()
@@ -32,6 +36,7 @@ public class Weed : MonoBehaviour
 
     void Start()
     {
+        IsOnTheGround = false;
         CurrentWater = 0;
     }
 

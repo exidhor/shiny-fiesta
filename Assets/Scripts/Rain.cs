@@ -52,7 +52,8 @@ public class Rain : MonoBehaviour {
     {
         if(coll.gameObject.CompareTag("Weed"))
         {
-
+            Weed weed = coll.gameObject.GetComponent<Weed>();
+            weed.ReceiveWater(FillBucketQuantity);
         } 
     }
 
