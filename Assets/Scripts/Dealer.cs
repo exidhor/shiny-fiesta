@@ -7,10 +7,25 @@ using UnityEngine;
 
 public class Dealer : MonoBehaviour
 {
-    // todo
-
     public int Sell(int Amount, WeedType type)
     {
-        return 0;
+        int unitPrice = 0;
+
+        switch (type)
+        {
+            case WeedType.Blue:
+                unitPrice = 8;
+                break;
+
+            case WeedType.Purple:
+                unitPrice = 2;
+                break;
+            
+            case WeedType.Red:
+                unitPrice = 50;
+                break;
+        }
+
+        return unitPrice * Amount;
     }
 }

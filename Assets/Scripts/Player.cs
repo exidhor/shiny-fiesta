@@ -84,7 +84,7 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-        score = 0;
+        //score = 0;
         WeedInContact = null;
         IsNearWell = false;
     }
@@ -122,7 +122,7 @@ public class Player : MonoBehaviour
 
         if (horizontal != 0)
         {
-            if (horizontal < 0 && !TriggerLeft.Collision)
+            if (horizontal < 0/* && !TriggerLeft.Collision*/)
             {
                 TargetRotation.rotation += -SpeedPlanet*Time.deltaTime;
                 transform.localScale = _leftScale;
@@ -131,8 +131,24 @@ public class Player : MonoBehaviour
                 TriggerLeft.transform.localScale = _leftScale;
 
                 BucketDisplay.transform.localScale = _leftScale;
+
+                if (_takable != null)
+                {
+                    Takable takable = _takable.GetComponent<Takable>();
+
+                    if (takable != null)
+                    {
+                        GameObject textInfo = takable.TextInfo;
+
+                        if (textInfo != null)
+                        {
+                            textInfo.transform.localScale = _leftScale;
+                        }
+                    }
+                }
+
             }
-            else if (horizontal > 0 && !TriggerRight.Collision)
+            else if (horizontal > 0/* && !TriggerRight.Collision*/)
             {
                 TargetRotation.rotation += SpeedPlanet*Time.deltaTime;
                 transform.localScale = _rightScale;
@@ -141,6 +157,21 @@ public class Player : MonoBehaviour
                 TriggerLeft.transform.localScale = _rightScale;
 
                 BucketDisplay.transform.localScale = _rightScale;
+
+                if (_takable != null)
+                {
+                    Takable takable = _takable.GetComponent<Takable>();
+
+                    if (takable != null)
+                    {
+                        GameObject textInfo = takable.TextInfo;
+
+                        if (textInfo != null)
+                        {
+                            textInfo.transform.localScale = _rightScale;
+                        }
+                    }
+                }
             }
 
             if (!IsRunning && IsGrounded)
@@ -309,6 +340,13 @@ public class Player : MonoBehaviour
     {
         if (_takable == null && InputManager.Instance.Action)
         {
+            GameObject textInfo = takable.TextInfo;
+
+            if (textInfo != null)
+            {
+                takable.TextInfo.SetActive(false);
+            }
+
             _takeSomethingThisFrame = true;
 
             _takable = takable.gameObject;
@@ -329,6 +367,7 @@ public class Player : MonoBehaviour
         {
             WeedInContact.ReceiveWater(_takable.gameObject.GetComponent<Bucket>().FillLevel);
             _takable.gameObject.GetComponent<Bucket>().FillLevel = 0;
+
             return;
         }
 
@@ -342,10 +381,24 @@ public class Player : MonoBehaviour
 
         _takable.transform.parent = TargetRotation.transform;
         _takable.transform.position = Ground.position;
+
         if (_takable.gameObject.GetComponent<Weed>() != null)
         {
             _takable.gameObject.GetComponent<Weed>().IsOnTheGround = true;
         }
+        
+        Takable takable = _takable.GetComponent<Takable>();
+
+        if (takable != null)
+        {
+            GameObject textInfo = takable.TextInfo;
+
+            if (textInfo != null)
+            {
+                textInfo.SetActive(true);
+            }
+        }
+
         _takable = null;
     }
 }

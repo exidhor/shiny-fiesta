@@ -16,7 +16,7 @@ public class Bucket : MonoBehaviour {
             IsCorupted = true;
             progress.IsCorrupted = true;
         }
-        if (IsCorupted)
+        if (!IsCorupted)
         {
             FillLevel += quantity;
             if (FillLevel >= CompleteLevel)

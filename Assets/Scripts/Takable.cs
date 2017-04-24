@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class Takable : MonoBehaviour
 {
+    public GameObject TextInfo;
+
     private Player _player;
 
     void FixedUpdate()

@@ -35,7 +35,7 @@ public class Weed : MonoBehaviour
     void Update()
     {
         SpriteRenderer renderer = gameObject.GetComponent<SpriteRenderer>();
-        if (CurrentWater < MaxWater/2)
+        if (CurrentWater <= MaxWater/3)
             renderer.sprite = sprites[0];
         else if (CurrentWater < MaxWater)
             renderer.sprite = sprites[1];
