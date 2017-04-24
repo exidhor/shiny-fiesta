@@ -338,7 +338,7 @@ public class Player : MonoBehaviour
 
     public bool Take(Takable takable)
     {
-        if (_takable == null && InputManager.Instance.Action)
+        if (_takable == null && IsGrounded && InputManager.Instance.Action)
         {
             GameObject textInfo = takable.TextInfo;
 
@@ -363,6 +363,9 @@ public class Player : MonoBehaviour
 
     public void Release()
     {
+        if (!IsGrounded)
+            return;
+
         if (WeedInContact != null && _takable != null && _takable.gameObject.GetComponent<Bucket>() != null && !_takable.gameObject.GetComponent<Bucket>().IsCorupted)
         {
             WeedInContact.ReceiveWater(_takable.gameObject.GetComponent<Bucket>().FillLevel);

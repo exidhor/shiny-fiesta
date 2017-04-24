@@ -28,7 +28,7 @@ public class Basket : MonoBehaviour
     {
         Weed weed = collider.GetComponent<Weed>();
 
-        if (weed != null)
+        if (weed != null && weed.IsPickable)
         {
             if (Amount > 0)
             {
